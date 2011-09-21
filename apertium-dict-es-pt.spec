@@ -2,14 +2,13 @@ Summary:	Spanish-Portuguese language pair for Apertium
 Summary(pl.UTF-8):	Para języków hiszpański-portugalski dla Apertium
 %define	lpair	es-pt
 Name:		apertium-dict-%{lpair}
-Version:	1.0.3
+Version:	1.1.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Text
 Source0:	http://downloads.sourceforge.net/apertium/apertium-%{lpair}-%{version}.tar.gz
-# Source0-md5:	0549493582ed682c6369b6a3ab3f09b5
+# Source0-md5:	10a20c2b9737f89fbb0d878d790a4dda
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-apertium32.patch
 URL:		http://www.apertium.org/
 BuildRequires:	apertium-devel >= 3.2.0
 BuildRequires:	autoconf >= 2.52
@@ -33,7 +32,6 @@ oznaczania części mowy w obu językach.
 %prep
 %setup -q -n apertium-%{lpair}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__aclocal}
@@ -50,9 +48,6 @@ install -d $RPM_BUILD_ROOT%{_datadir}/apertium/modes
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-# not needed here (see modes subdir) and contain wrong (builddir) paths
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/apertium/apertium-%{lpair}/*.mode
 
 %clean
 rm -rf $RPM_BUILD_ROOT
